@@ -1,81 +1,36 @@
-import './style.css'
+//import './style.css'
 
-let projects = [];
+import { Todo } from './Todo.js';
+import { Project } from './Project.js';
 
-{/* <main>
-  <h1>Project 1 > Task 1</h1>
-  <div class="details">
-    <div class="description">
-      <h2>Description</h2>
-      <textarea name="description" id="description" cols="150" rows="10">Titulo</textarea>
-    </div>
-    <div class="due-date">
-      <h2>Due Date</h2>
-      <p>27/02/2024</p>
-    </div>
-    <div class="priority">
-      <h2>Priority</h2>
-      <p>High</p>
-    </div>
-    <button class="delete">Delete</button>
-  </div>
-</main> */}
+import { Sidebar } from './components/Sidebar.js';
+import { Todew } from './components/pages/Todew.js';
+import { Home } from './components/pages/Home.js';
+import { CreateProject } from './components/pages/CreateProject.js';
+import { CreateTodew } from './components/pages/CreateTodew.js';
 
-function ProjectComponent(project) {
-  const main = document.createElement('main');
+import { loadProjects } from './controllers/todoControllers.js';
 
-  const title = document.createElement('h1');
-  title.textContent = project.getTitle();
-  main.appendChild(title);
-  
-  const details = document.createElement('div');
-  details.classList.add('details');
 
-  const description = document.createElement('div');
-  description.classList.add('description');
+let projects = loadProjects();
 
-  const descriptionTitle = document.createElement('h2');
-  descriptionTitle.textContent = 'Description';
-  description.appendChild(descriptionTitle);
+const container = document.getElementById('container');
+container.appendChild(Sidebar(projects));
 
-  const descriptionText = document.createElement('textarea');
-  descriptionText.textContent = project.getDescription();
+if (projects.length > 0) {
+  const project = projects[0];
 
-  
-
-  return projectDiv;
-
+  if (project.getTodos().length === 0) {
+    container.appendChild(CreateTodew(project));
+  } else {
+    container.appendChild(Todew(project.getTodos()[0]));
+  }
+} else {
+  container.appendChild(Home());
 }
 
-function Todo() {
-  let title;
-  let description;
-  let dueDate;
-  let priority;
-  
-  const getTitle = () => title;
-  const getDescription = () => description;
-  const getDueDate = () => dueDate;
-  const getPriority = () => priority;
+import {addProject, saveProjects, addTodoToProject} from './controllers/todoControllers.js';
 
-  const setTitle = (newTitle) => title = newTitle;
-  const setDescription = (newDescription) => description = newDescription;
-  const setDueDate = (newDueDate) => dueDate = newDueDate;
-  const setPriority = (newPriority) => priority = newPriority;
+addProject('Test Project');
 
-  return {getTitle, getDescription, getDueDate, getPriority, setTitle, setDescription, setDueDate, setPriority};
-}
-
-function Project() {
-  let title
-  let todos = [];
-
-  const getTitle = () => title;
-  const getTodos = () => todos;
-
-  const setTitle = (newTitle) => title = newTitle;
-  const addTodo = (todo) => todos.push(todo);
-  const removeTodo = (todo) => todos = todos.filter((t) => t !== todo);
-
-  return {getTitle, getTodos, setTitle, addTodo, removeTodo};
-}
+console.log(`Projects coming from localstorage: ${loadProjects()}`);

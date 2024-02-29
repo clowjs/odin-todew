@@ -116,7 +116,7 @@ main {
   gap: .5rem;
 }
 
-#projects > li:not(:last-child) {
+#projects > a:not(:last-child) {
   border-bottom: 1px solid #0f172a;
 }
 

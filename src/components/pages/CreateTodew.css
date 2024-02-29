@@ -1,0 +1,31 @@
+.create-todew {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.create-todew > form > button {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+#create-todew-form > textarea {
+  width: 30rem;
+  height: 10rem;
+  padding: .5rem;
+  font-size: 1rem;
+  border: 1px solid #0f172a;
+
+}
+
+#create-todew-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

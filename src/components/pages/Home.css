@@ -1,0 +1,12 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.home > button {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
