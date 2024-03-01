@@ -1,4 +1,4 @@
-// import './Home.css';
+import './Home.css';
 
 import { renderCreateProject } from '../../controllers/renderControllers.js';
 

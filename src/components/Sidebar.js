@@ -1,4 +1,4 @@
-// import './Sidebar.css'
+import './Sidebar.css'
 
 import { renderTodew, renderCreateProject, renderCreateTodew } from "../controllers/renderControllers.js";
 import { loadProjects } from "../controllers/todoControllers.js";
@@ -76,34 +76,3 @@ export function Sidebar() {
 
   return sidebar;
 }
-
-{/* <nav id="sidebar">
-  <h1 class="logo">ToDew</h1>
-  <h3>Projects</h3>
-  <ul id="projects">
-    <li>
-      <span class="project-title">Project 1</span>
-      <ul class="project">
-        <li class="project-todew">Task 1</li>
-        <li class="project-todew">Task 2</li>
-        <li class="project-todew">Task 3</li>
-      </ul>
-    </li>
-    <li>
-      <span class="project-title">Project 2</span>
-      <ul class="project">
-        <li class="project-todew">Task 1</li>
-        <li class="project-todew">Task 2</li>
-        <li class="project-todew">Task 3</li>
-      </ul>
-    </li>
-    <li>
-      <span class="project-title">Project 3</span>
-      <ul class="project">
-        <li class="project-todew">Task 1</li>
-        <li class="project-todew">Task 2</li>
-        <li class="project-todew">Task 3</li>
-      </ul>
-    </li>
-  </ul>
-</nav> */}

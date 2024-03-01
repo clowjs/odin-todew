@@ -1,4 +1,4 @@
-// import './CreateProject.css'
+import './CreateProject.css'
 
 import { addProject } from '../../controllers/todoControllers.js';
 
@@ -32,7 +32,6 @@ export function CreateProject() {
   submitButton.type = 'button';
   submitButton.addEventListener('click', () => {
     const projectName = document.getElementById('project-name').value;
-    console.log(projectName);
     addProject(projectName);
 
     renderContainer();

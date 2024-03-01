@@ -1,11 +1,9 @@
-// import './Todew.css'
+import './Todew.css'
 
 import { renderContainer, renderTodew } from '../../controllers/renderControllers.js';
 import { editTodoInProject, removeTodoFromProject } from '../../controllers/todoControllers.js';
 
 export function Todew(todo) {
-  console.log(`Rendering Todew for ${todo.getId()}`);
-
   const main = document.createElement('main');
   main.id = 'content';
   main.classList.add('todew');
@@ -91,7 +89,6 @@ export function Todew(todo) {
   deleteButton.classList.add('delete');
   deleteButton.textContent = 'Delete';
   deleteButton.addEventListener('click', () => {
-    console.log(todo.getProjectId(), todo.getId());
     removeTodoFromProject(todo.getProjectId(), todo.getId());
     renderContainer();
   });
