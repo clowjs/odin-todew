@@ -1,0 +1,10 @@
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons-container > button {
+  background-color: #0f172a;
+  color: #f1f5f9;
+  padding: 1rem 1.5rem;
+}

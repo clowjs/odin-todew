@@ -6,6 +6,7 @@ export function Todo(
   initialDueDate = '',
   initialPriority = 'low',
   initialDone = false,
+  initialProjectId = '',
   id = generateId()
   ) {
 
@@ -14,6 +15,7 @@ export function Todo(
   let dueDate = initialDueDate;
   let priority = initialPriority;
   let done = initialDone;
+  let projectId = initialProjectId;
   
   const getId = () => id;
   const getTitle = () => title;
@@ -21,12 +23,14 @@ export function Todo(
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
   const getDone = () => done;
+  const getProjectId = () => projectId;
 
   const setTitle = (newTitle) => title = newTitle;
   const setDescription = (newDescription) => description = newDescription;
   const setDueDate = (newDueDate) => dueDate = newDueDate;
   const setPriority = (newPriority) => priority = newPriority;
   const setDone = (newDone) => done = newDone;
+  const setProjectId = (newProjectId) => projectId = newProjectId;
 
   const toSerializableObject = () => ({
     id,
@@ -35,6 +39,7 @@ export function Todo(
     dueDate,
     priority,
     done,
+    projectId
   });
 
   return {
@@ -44,11 +49,13 @@ export function Todo(
     getDueDate, 
     getPriority, 
     getDone, 
+    getProjectId,
     setTitle, 
     setDescription, 
     setDueDate, 
     setPriority, 
     setDone, 
+    setProjectId,
     toSerializableObject
   };
 }

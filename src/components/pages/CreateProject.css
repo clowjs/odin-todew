@@ -6,11 +6,6 @@
   gap: 1rem;
 }
 
-.create-project > form > button {
-  background-color: #0f172a;
-  color: #f1f5f9;
-}
-
 label {
   font-size: 1.2rem;
 }
@@ -20,4 +15,13 @@ label {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  > button {
+    background-color: #0f172a;
+    color: #f1f5f9;
+  }
+
+  > h1 {
+    font-size: 1.2rem;
+  }
 }

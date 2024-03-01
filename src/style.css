@@ -76,6 +76,13 @@ main {
   gap: 1rem;
 }
 
+input[type="text"], input[type="password"] {
+  width: 15rem;
+  padding: .5rem;
+  font-size: 1rem;
+  border: 1px solid #0f172a;
+}
+
 #projects, #todews {
   padding-left: .5rem;
   display: flex;
@@ -116,7 +123,7 @@ main {
   gap: .5rem;
 }
 
-#projects > a:not(:last-child) {
+#projects > li:not(:last-child) {
   border-bottom: 1px solid #0f172a;
 }
 

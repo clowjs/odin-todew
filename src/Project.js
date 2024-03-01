@@ -10,7 +10,9 @@ export function Project(initialTitle = '', id = generateId()) {
 
   const setTitle = (newTitle) => title = newTitle;
   const addTodo = (todo) => todos.push(todo);
-  const removeTodo = (todo) => todos = todos.filter((t) => t !== todo);
+  const removeTodo = (todoId) => {
+    todos = todos.filter(todo => todo.getId() !== todoId);
+  };
 
   const toSerializableObject = () => ({
     id,

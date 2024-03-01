@@ -1,6 +1,11 @@
 // import './Sidebar.css'
 
-export function Sidebar(projects) {
+import { renderTodew, renderCreateProject, renderCreateTodew } from "../controllers/renderControllers.js";
+import { loadProjects } from "../controllers/todoControllers.js";
+
+export function Sidebar() {
+  const projects = loadProjects();
+
   const sidebar = document.createElement('nav');
   sidebar.id = 'sidebar';
 
@@ -8,6 +13,27 @@ export function Sidebar(projects) {
   logo.classList.add('logo');
   logo.textContent = 'ToDew';
   sidebar.appendChild(logo);
+
+  const buttonsContainer = document.createElement('div');
+  buttonsContainer.classList.add('buttons-container');
+
+  const createProjectButton = document.createElement('button');
+  createProjectButton.textContent = '+ Project';
+  createProjectButton.type = 'button';
+  createProjectButton.addEventListener('click', () => {
+    renderCreateProject();
+  });
+  buttonsContainer.appendChild(createProjectButton);
+
+  const createTodewButton = document.createElement('button');
+  createTodewButton.textContent = '+ ToDew';
+  createTodewButton.type = 'button';
+  createTodewButton.addEventListener('click', () => {
+    renderCreateTodew();
+  });
+  buttonsContainer.appendChild(createTodewButton);
+
+  sidebar.appendChild(buttonsContainer);
 
   const projectsTitle = document.createElement('h3');
   projectsTitle.textContent = 'Projects';
@@ -28,9 +54,16 @@ export function Sidebar(projects) {
     projectTodos.classList.add('project');
 
     project.getTodos().forEach(todo => {
-      const todoItem = document.createElement('a');
+      if (todo.getDone()) return;
+
+      const todoItem = document.createElement('li');
       todoItem.classList.add('project-todew');
-      todoItem.textContent = todo.getTitle();
+      todoItem.textContent = `- ${todo.getTitle()}`;
+
+      todoItem.addEventListener('click', () => {
+        renderTodew(todo);
+      });
+
       projectTodos.appendChild(todoItem);
     });
 

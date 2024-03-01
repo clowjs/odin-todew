@@ -1,7 +1,7 @@
 // import './CreateTodew.css'
 
 import { loadProjects } from '../../controllers/todoControllers.js';
-import { renderCreateProject, renderTodew } from '../../controllers/renderControllers.js';
+import { renderContainer, renderCreateProject, renderTodew } from '../../controllers/renderControllers.js';
 
 import { Todo } from '../../Todo.js';
 
@@ -19,10 +19,10 @@ export function CreateTodew() {
   main.classList.add('create-todew');
 
   const title = document.createElement('h1');
-  title.textContent = 'Create a New ToDew';
+  title.textContent = 'Create a new ToDew';
   main.appendChild(title);
 
-  const form = document.createElement('form');
+  const form = document.createElement('div');
   form.id = 'create-todew-form';
 
   const projectLabel = document.createElement('label');
@@ -75,6 +75,12 @@ export function CreateTodew() {
   dueDateInput.name = 'due-date';
   dueDateInput.type = 'date';
   dueDateInput.required = true;
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  dueDateInput.setAttribute('min', today);
   form.appendChild(dueDateInput);
 
   const priorityLabel = document.createElement('label');
@@ -87,15 +93,15 @@ export function CreateTodew() {
   priorityInput.name = 'priority';
 
   const lowOption = document.createElement('option');
-  lowOption.value = 'low';
+  lowOption.value = 'Low';
   lowOption.textContent = 'Low';
   
   const mediumOption = document.createElement('option');
-  mediumOption.value = 'medium';
+  mediumOption.value = 'Medium';
   mediumOption.textContent = 'Medium';
   
   const highOption = document.createElement('option');
-  highOption.value = 'high';
+  highOption.value = 'High';
   highOption.textContent = 'High';
   
   priorityInput.appendChild(lowOption);
@@ -112,17 +118,19 @@ export function CreateTodew() {
     const dueDate = document.getElementById('due-date').value;
     const priority = document.getElementById('priority').value;
 
+    const selectedProjectId = document.getElementById('project').value;
+    const selectedProject = projects.find(project => project.getId() === selectedProjectId);
+
     const newTodo = Todo();
     newTodo.setTitle(title);
     newTodo.setDescription(description);
     newTodo.setDueDate(dueDate);
     newTodo.setPriority(priority);
     newTodo.setDone(false);
-
-    const selectedProjectId = document.getElementById('project').value;
-    const selectedProject = projects.find(project => project.getId() === selectedProjectId);
+    newTodo.setProjectId(selectedProject.getId());
 
     addTodoToProject(selectedProject.getId(), newTodo);
+    renderContainer();
     renderTodew(newTodo);
   });
   form.appendChild(submitButton);

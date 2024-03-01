@@ -2,7 +2,7 @@
 
 import { addProject } from '../../controllers/todoControllers.js';
 
-import { renderCreateTodew } from '../../controllers/renderControllers.js';
+import { renderContainer, renderCreateTodew } from '../../controllers/renderControllers.js';
 
 export function CreateProject() {
   const main = document.createElement('main');
@@ -13,12 +13,11 @@ export function CreateProject() {
   title.textContent = 'Create a new project';
   main.appendChild(title);
 
-  const form = document.createElement('form');
+  const form = document.createElement('div');
   form.id = 'create-project-form';
 
-  const nameLabel = document.createElement('label');
+  const nameLabel = document.createElement('h1');
   nameLabel.textContent = 'Title';
-  nameLabel.htmlFor = 'project-name';
   form.appendChild(nameLabel);
 
   const nameInput = document.createElement('input');
@@ -35,6 +34,8 @@ export function CreateProject() {
     const projectName = document.getElementById('project-name').value;
     console.log(projectName);
     addProject(projectName);
+
+    renderContainer();
     renderCreateTodew();
   });
   form.appendChild(submitButton);
