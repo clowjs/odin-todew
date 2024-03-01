@@ -5,3 +5,16 @@
     font-size: 1rem;
     border: 1px solid #0f172a;
 }
+
+#due-date {
+    align-self: flex-start;
+}
+
+#priority {
+    align-self: flex-start;
+}
+
+#content > div > button.save {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}

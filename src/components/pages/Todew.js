@@ -1,7 +1,7 @@
 // import './Todew.css'
 
-import { renderContainer } from '../../controllers/renderControllers.js';
-import { removeTodoFromProject } from '../../controllers/todoControllers.js';
+import { renderContainer, renderTodew } from '../../controllers/renderControllers.js';
+import { editTodoInProject, removeTodoFromProject } from '../../controllers/todoControllers.js';
 
 export function Todew(todo) {
   console.log(`Rendering Todew for ${todo.getId()}`);
@@ -26,6 +26,7 @@ export function Todew(todo) {
 
   const descriptionText = document.createElement('textarea');
   descriptionText.textContent = todo.getDescription();
+  descriptionText.id = 'description';
   description.appendChild(descriptionText);
 
   details.appendChild(description);
@@ -37,9 +38,18 @@ export function Todew(todo) {
   dueDateTitle.textContent = 'Due Date';
   dueDate.appendChild(dueDateTitle);
 
-  const dueDateText = document.createElement('p');
-  dueDateText.textContent = todo.getDueDate();
-  dueDate.appendChild(dueDateText);
+  const dueDateInput = document.createElement('input');
+  dueDateInput.type = 'date';
+  dueDateInput.id = 'due-date';
+  dueDateInput.value = todo.getDueDate();
+  let today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  dueDateInput.setAttribute('min', today);
+
+  dueDate.appendChild(dueDateInput);
 
   details.appendChild(dueDate);
 
@@ -50,11 +60,32 @@ export function Todew(todo) {
   priorityTitle.textContent = 'Priority';
   priority.appendChild(priorityTitle);
 
-  const priorityText = document.createElement('p');
-  priorityText.textContent = todo.getPriority();
-  priority.appendChild(priorityText);
+  const prioritySelect = document.createElement('select');
+  prioritySelect.id = 'priority';
+  const options = ['Low', 'Medium', 'High'];
+  options.forEach(optionValue => {
+    const option = document.createElement('option');
+    option.value = optionValue;
+    option.textContent = optionValue;
+    prioritySelect.appendChild(option);
+  });
+  prioritySelect.value = todo.getPriority();
+  priority.appendChild(prioritySelect);
 
   details.appendChild(priority);
+
+  const saveButton = document.createElement('button');
+  saveButton.classList.add('save');
+  saveButton.textContent = 'Save';
+  saveButton.addEventListener('click', () => {
+    todo.setTitle(title.textContent);
+    todo.setDescription(descriptionText.value);
+    todo.setDueDate(dueDateInput.value);
+    todo.setPriority(prioritySelect.value);
+    editTodoInProject(todo.getProjectId(), todo);
+    renderTodew(todo);
+  });
+  details.appendChild(saveButton);
 
   const deleteButton = document.createElement('button');
   deleteButton.classList.add('delete');
@@ -70,22 +101,3 @@ export function Todew(todo) {
 
   return main;
 }
-
-{/* <main id="content">
-  <h1>Project 1 > Task 1</h1>
-  <div class="details">
-    <div class="description">
-      <h2>Description</h2>
-      <textarea name="description" id="description" cols="150" rows="10">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</textarea>
-    </div>
-    <div class="due-date">
-      <h2>Due Date</h2>
-      <p>27/02/2024</p>
-    </div>
-    <div class="priority">
-      <h2>Priority</h2>
-      <p>High</p>
-    </div>
-    <button class="delete">Delete</button>
-  </div>
-</main> */}

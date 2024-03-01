@@ -68,3 +68,15 @@ export function removeTodoFromProject(projectId, todoId) {
 
   saveProjects(savedProjects);
 }
+
+export function editTodoInProject(projectId, todo) {
+  let savedProjects = loadProjects();
+
+  let project = savedProjects.find(p => p.getId() === projectId);
+
+  let todos = project.getTodos();
+  let index = todos.findIndex(t => t.getId() === todo.getId());
+  todos[index] = todo;
+
+  saveProjects(savedProjects);
+}
